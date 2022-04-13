@@ -1,10 +1,26 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view />
+  <div id="app">
+    <component :is="layout">
+      <router-view />
+    </component>
+  </div>
 </template>
+
+<script>
+import EmptyLayout from "@/layouts/EmptyLayout";
+import MainLayout from "@/layouts/MainLayout";
+export default {
+  computed: {
+    layout() {
+      return this.$route.meta.layout || "empty";
+    },
+  },
+  components: {
+    EmptyLayout,
+    MainLayout,
+  },
+};
+</script>
 
 <style>
 #app {
